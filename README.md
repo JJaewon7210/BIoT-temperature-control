@@ -33,7 +33,7 @@ Latest Docker and Visual Studio Code was used to manage this works.
 
 - use 'cyrpto-config.yaml' in the 'artifacts/channel/crypto-config.yaml'
 - ![image](https://user-images.githubusercontent.com/96426723/146774752-d1bd0613-572a-4be2-85e6-36759a211f64.png){: width="100" height="100"}
-
+<img src="https://user-images.githubusercontent.com/96426723/146774752-d1bd0613-572a-4be2-85e6-36759a211f64.png" width="30%">
 **cryto-config.yaml** 파일에는 네트워크를 구성하는 org와 peer의 정보가 담겨있습니다.
 - Oragnization 1  template count 가 2개라는 건 피어(peer)가 두개라 certifacate를 2개 만든다는 의미입니다.
 - Users count가 1개라는건 default user을 의미합니다.

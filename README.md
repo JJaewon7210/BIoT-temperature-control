@@ -29,7 +29,8 @@ Latest Docker and Visual Studio Code was used to manage this works.
 - sudo chmod -R 755 ./
 
 # 3. Create organization and crypto materials
-3-1.  Configtx File: Create Crypto Materials
+
+**3-1.  Configtx File: Create Crypto Materials**
 
 - use 'cyrpto-config.yaml' in the 'artifacts/channel/crypto-config.yaml'
 
@@ -47,7 +48,7 @@ Latest Docker and Visual Studio Code was used to manage this works.
 - MSP도 마찬가지로 PKI (공개키 구조 기반)을 사용합니다.
 - 여기서, tlsca는 보안통신용을 말합니다.
 
-3-2. Configtx File: Create Network Artifacts
+**3-2. Configtx File: Create Network Artifacts**
 
 앞서서 Organization을 구성했다면 이제는 network를 구성해볼 차례입니다.
 
@@ -124,7 +125,7 @@ $ sudo mount --make-shared /
 
 # 5. Channel up
 
-5.1 Create channel
+**5.1 Create channel**
 
 **-o**: 오더러를 의미합니다. 오더러의 포트를 써줍니다. docker ps 를 쳤을 때 oderer의 포트는 다음과 같습니다.
 
@@ -144,13 +145,17 @@ $ sudo mount --make-shared /
 
 <img src="https://user-images.githubusercontent.com/96426723/146779736-c2e9d0a2-f5b1-4584-a83e-57dfa393954b.png" width="80%">
 
-5.2 joinChannel
+
+
+**5.2 joinChannel**
 
 createChannel()에서 만든 ./artifacts/channel/${CHANNEL_NAME}.tx에다가 미쳐 추가하지 못한 Peer를 추가해줍니다.
 
 <img src="https://user-images.githubusercontent.com/96426723/146779789-bc9eff3f-dd18-4dd7-a58c-32167375b3ab.png" width="45%">
 
-5.3 updateAnchorPeers
+
+
+**5.3 updateAnchorPeers**
 
 peer0가 각 organization에서 anchor peer을 맞고 있기 때문에 update 해주도록 합니다.
 
@@ -160,7 +165,9 @@ peer0가 각 organization에서 anchor peer을 맞고 있기 때문에 update �
 
 deployChaincode.sh에서 체인코드를 설치하고 불러오고 지지고 볶을 수 있습니다.
 
-6.1 presetup
+
+
+**6.1 presetup**
 
 체인코드가 적혀있는 go 파일을 복사해서 붙여넣기를 해주고  잘 작동할지 on go mod vendor로 확인합니다. go mod vendor로 모듈관리가 가능합니다.
 
@@ -172,7 +179,9 @@ export GOSUMDB=off
 
 go의 위치를 /home/jaewon으로 해서 다시 설치해줍니다.
 
-6.2 packageChaincode
+
+
+**6.2 packageChaincode**
 
 fabcar.tar.gz파일이 생기는걸 확인가능합니다.
 그 후, 도커 컨테이너에 피어들이 작동하도록 설정합니다.
@@ -184,19 +193,19 @@ docker-compose up -d
 <img src="https://user-images.githubusercontent.com/96426723/146780429-2a41c0d4-dd46-4add-806b-2bff279352ba.png" width="75%">
 
 
-6.3 installChaincode
+**6.3 installChaincode**
 
 모든 peer에 chaincode를 설치합니다. 앞서 생성한 체인코드가 각 피어에 설치됩니다.
 
 <img src="ttps://user-images.githubusercontent.com/96426723/146780498-c373a427-0372-4ae0-b24c-c73eeaa091c6.png" width="75%">
 
-6.4 queryInstalled & approveForMyOrg1
+**6.4 queryInstalled & approveForMyOrg1**
 
 queryInstalled 함수를 통해 잘 설치되었는지 확인할 수 있습니다.
 
 <img src="https://user-images.githubusercontent.com/96426723/146780604-deada050-72f9-4bd4-9987-59f5ceacd5ef.png" width="85%">
 
-6.5 checkCommitReadyness
+**6.5 checkCommitReadyness**
 
 Organization 1의 MSP가 승인되었음을 알 수 있습니다. Organization 2의 MSP도 이제 설정해주도록합니다.
 
@@ -204,13 +213,13 @@ Organization 1의 MSP가 승인되었음을 알 수 있습니다. Organization 2
 
 <img src="https://user-images.githubusercontent.com/96426723/146780759-c37bcd85-de12-4ec9-a1f8-0b196ace3cc0.png" width="35%">
 
-6.6 commitChaincodeDefination
+**6.6 commitChaincodeDefination**
 
 localhost 7051, localhost 9051에 대해서 chaincode가 설치외어있음을 확인할 수 있습니다.
 
 <img src="https://user-images.githubusercontent.com/96426723/146780831-43748a89-32d0-4270-9804-98bb4eb53d03.png" width="100%">
 
-6.7 chaincodeInvokeInit
+**6.7 chaincodeInvokeInit**
 
 체인코드를 invoke하는 코드입니다.
 

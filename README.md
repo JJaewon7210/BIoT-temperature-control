@@ -66,4 +66,40 @@ create-artifacts.sh 파일에는 OrdererGenesis와 BasicChannel을 만들 수 �
 permission denied error가 뜬다면, "chmod -R 0755 /home/bin/configtxgen" 명령어를 입력합시다.
 ![image](https://user-images.githubusercontent.com/96426723/146776081-fc191725-e14e-4414-936f-6eb8677bddb7.png)
 
+# 4. Network Up
+저는 hyperledger fabric 2.1.1을 사용했습니다.
 
+**ca-orgs1**
+docker compose에는 앞서서 설정한 두개 organization과 organization에 해당하는 2개의 peer 정보 그리고 각각의 peer에 해당하는 4개의 couchdb를 장착하였습니다.
+![image](https://user-images.githubusercontent.com/96426723/146777023-288eaa33-346d-4b05-b526-9b019d6e6331.png)
+
+**orderer.example.com**
+오더러를 보면 volumes에서 우리는 이미 생성한 genesis 블록이 있기 때문에 이를 마운팅해주기 위해 다음과 같이 적어줍니다.
+![image](https://user-images.githubusercontent.com/96426723/146777119-1b3d307e-7816-4b1e-8bfc-9d5f01a745e4.png)
+orderer_operations_listenaddress가 설정되어있지만 이는 크게 중요하지 중요하지 않다고 합니다.
+![image](https://user-images.githubusercontent.com/96426723/146777207-0e88b197-31e9-404b-8a84-c4d4f5820a98.png)
+7050포트는 orderer가 작동되는 곳이며 8443 포트는 listenport가 작동하는 곳입니다.
+
+**couchdb0**
+environment 변수는 아직 공백으로 두고 port는 5984로 열며 network는 같은 네트워크에서 작동하도록 gkqslek.
+![image](https://user-images.githubusercontent.com/96426723/146777325-5bd7e2c1-c53a-4f9b-b145-8ef1c85d2765.png)
+couchDB는 피어별로 포트만 다르게 해서 설정해줍니다. 6984:5984 , 7984:5984, 8984:5984
+
+**peer0.org1.example.com**
+base yaml에 적혀있는 환경변수와 연결시켜 줍니다.
+![image](https://user-images.githubusercontent.com/96426723/146777433-1a58bfe4-3dae-4d62-a484-1c7b4480909e.png)
+volumes은 기존에 있는 폴더를 연결해주도록 합니다.
+![image](https://user-images.githubusercontent.com/96426723/146777488-9880de25-b156-4b96-b608-09fd412f0f5f.png)
+
+**network up!**
+터미널에서 docker-compose.yaml있는 폴더로 가서 네트워크를 실행해보도록 합니다.
+$ docker-compose up -d
+![image](https://user-images.githubusercontent.com/96426723/146777535-98c7307f-a443-4657-a93e-82213793b2ca.png)
+
+PORTS와 NAMES를 확인해봅니다.
+$ docker ps
+![image](https://user-images.githubusercontent.com/96426723/146777616-1608883b-1298-46df-a6a1-4df0461d701b.png)
+
+* 에러처리
+Error response from daemon: path /home/jaewon/BasicNetwork-2.0/artifacts/channel is mounted on / but it is not a shared mount.
+$ sudo mount --make-shared /

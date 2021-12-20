@@ -59,3 +59,23 @@ Latest Docker and Visual Studio Code was used to manage this works.
 - MSPDir: crypto-config 파일에서 생성된 orderer 의 MSP 폴더 위치를 적어줍니다.
 - Policies: policies에는 종류가 2가지 있습니다. (공식홈페이지를 참고합시다.)
 
+## Application 설정		
+Application: &ApplicationDefaults		
+    Policies: &ApplicationDefaultPolicies  # Application 정책 설정		
+        LifecycleEndorsement:              # 체인코드 Lifecycle 관련 정책		
+            Type: ImplicitMeta             # 정책 타입 (Signature(서명), ImplicitMeta)		
+            Rule: "MAJORITY Endorsement"		
+        Endorsement:                       # 보증 정책		
+            Type:  ImplicitMeta		
+            Rule: "MAJORITY Endorsement"		
+        Readers:                           # 읽기 정책		
+            Type: ImplicitMeta		
+            Rule: "ANY Readers"		
+        Writers:                           # 쓰기 정책		
+            Type: ImplicitMeta		
+            Rule: "ANY Writers"		
+        Admins:                            # 어드민 정책		
+            Type: ImplicitMeta		
+            Rule: "MAJORITY Admins"		
+    Capabilities:		
+        <<: *ApplicationCapabilities		

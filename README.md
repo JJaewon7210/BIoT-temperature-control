@@ -32,7 +32,7 @@ Latest Docker and Visual Studio Code was used to manage this works.
 3-1.  Configtx File: Create Crypto Materials
 
 - use 'cyrpto-config.yaml' in the 'artifacts/channel/crypto-config.yaml'
-- ![image](https://user-images.githubusercontent.com/96426723/146774752-d1bd0613-572a-4be2-85e6-36759a211f64.png)
+- ![image](https://user-images.githubusercontent.com/96426723/146774752-d1bd0613-572a-4be2-85e6-36759a211f64.png){: width="100" height="100"}
 
 **cryto-config.yaml** 파일에는 네트워크를 구성하는 org와 peer의 정보가 담겨있습니다.
 - Oragnization 1  template count 가 2개라는 건 피어(peer)가 두개라 certifacate를 2개 만든다는 의미입니다.
@@ -65,12 +65,15 @@ create-artifacts.sh 파일에는 OrdererGenesis와 BasicChannel을 만들 수 �
 
 permission denied error가 뜬다면, "chmod -R 0755 /home/bin/configtxgen" 명령어를 입력합시다.
 ![image](https://user-images.githubusercontent.com/96426723/146776081-fc191725-e14e-4414-936f-6eb8677bddb7.png)
+<img src="https://user-images.githubusercontent.com/96426723/146776081-fc191725-e14e-4414-936f-6eb8677bddb7.png" width="30%">
 
 # 4. Network Up
 저는 hyperledger fabric 2.1.1을 사용했습니다.
 
 **ca-orgs1**
 docker compose에는 앞서서 설정한 두개 organization과 organization에 해당하는 2개의 peer 정보 그리고 각각의 peer에 해당하는 4개의 couchdb를 장착하였습니다.
+
+
 ![image](https://user-images.githubusercontent.com/96426723/146777023-288eaa33-346d-4b05-b526-9b019d6e6331.png)
 
 **orderer.example.com**
@@ -81,7 +84,7 @@ orderer_operations_listenaddress가 설정되어있지만 이는 크게 중요�
 7050포트는 orderer가 작동되는 곳이며 8443 포트는 listenport가 작동하는 곳입니다.
 
 **couchdb0**
-environment 변수는 아직 공백으로 두고 port는 5984로 열며 network는 같은 네트워크에서 작동하도록 gkqslek.
+environment 변수는 아직 공백으로 두고 port는 5984로 열며 network는 같은 네트워크에서 작동하도록 합니다.
 ![image](https://user-images.githubusercontent.com/96426723/146777325-5bd7e2c1-c53a-4f9b-b145-8ef1c85d2765.png)
 couchDB는 피어별로 포트만 다르게 해서 설정해줍니다. 6984:5984 , 7984:5984, 8984:5984
 

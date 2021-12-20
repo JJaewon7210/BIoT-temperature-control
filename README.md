@@ -32,7 +32,10 @@ Latest Docker and Visual Studio Code was used to manage this works.
 3-1.  Configtx File: Create Crypto Materials
 
 - use 'cyrpto-config.yaml' in the 'artifacts/channel/crypto-config.yaml'
+
 <img src="https://user-images.githubusercontent.com/96426723/146774752-d1bd0613-572a-4be2-85e6-36759a211f64.png" width="40%">
+
+
 **cryto-config.yaml** 파일에는 네트워크를 구성하는 org와 peer의 정보가 담겨있습니다.
 - Oragnization 1  template count 가 2개라는 건 피어(peer)가 두개라 certifacate를 2개 만든다는 의미입니다.
 - Users count가 1개라는건 default user을 의미합니다.
@@ -114,5 +117,40 @@ $ docker ps
 <img src="https://user-images.githubusercontent.com/96426723/146777616-1608883b-1298-46df-a6a1-4df0461d701b.png" width="100%">
 
 * 에러처리
+
 Error response from daemon: path /home/jaewon/BasicNetwork-2.0/artifacts/channel is mounted on / but it is not a shared mount.
+
 $ sudo mount --make-shared /
+
+# 5. Channel up
+
+5.1 Create channel
+**-o**: 오더러를 의미합니다. 오더러의 포트를 써줍니다. docker ps 를 쳤을 때 oderer의 포트는 다음과 같습니다.
+
+ 0.0.0.0:7050->7050/tcp, :::7050->7050/tcp, 0.0.0.0:8443->8443/tcp, :::8443->8443/tcp
+ 
+ orderer의 주소는 7050이므로 localhost:7050dmf 여기에 적어줍니다.
+ 
+ **--ordererTLSHostnameOverride**는 orderer.example.com으로 작성해줍니다.
+ 
+ **-f**는 mychannel.tx의 파일이 있는 곳의 경로를 쳐줍시다.
+ 
+ 그리고 그 뒤에는 결과로 나올 block의 경로를 적어줍니다. channel-artifacts 폴더에 블록을 생성해주도록 합니다.
+ 
+**--tls**는 통신 여부를 묻는 것입니다. -> TRUE
+
+**--cafile**는 인증서의 위치를 묻는 것입니다. ->  ORDERER_CA=${PWD}/artifacts/channel/crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
+
+<img src="https://user-images.githubusercontent.com/96426723/146779736-c2e9d0a2-f5b1-4584-a83e-57dfa393954b.png" width="80%">
+
+5.2 joinChannel
+createChannel()에서 만든 ./artifacts/channel/${CHANNEL_NAME}.tx에다가 미쳐 추가하지 못한 Peer를 추가해줍니다.
+
+<img src="https://user-images.githubusercontent.com/96426723/146779789-bc9eff3f-dd18-4dd7-a58c-32167375b3ab.png" width="45%">
+
+5.3 updateAnchorPeers
+peer0가 각 organization에서 anchor peer을 맞고 있기 때문에 update 해주도록 합니다.
+
+<img src="https://user-images.githubusercontent.com/96426723/146779803-7d04bf6a-6a96-43a9-8fd5-5125727a7b0e.png" width="75%">
+
+ 

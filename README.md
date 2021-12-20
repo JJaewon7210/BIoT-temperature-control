@@ -125,6 +125,7 @@ $ sudo mount --make-shared /
 # 5. Channel up
 
 5.1 Create channel
+
 **-o**: 오더러를 의미합니다. 오더러의 포트를 써줍니다. docker ps 를 쳤을 때 oderer의 포트는 다음과 같습니다.
 
  0.0.0.0:7050->7050/tcp, :::7050->7050/tcp, 0.0.0.0:8443->8443/tcp, :::8443->8443/tcp
@@ -144,11 +145,13 @@ $ sudo mount --make-shared /
 <img src="https://user-images.githubusercontent.com/96426723/146779736-c2e9d0a2-f5b1-4584-a83e-57dfa393954b.png" width="80%">
 
 5.2 joinChannel
+
 createChannel()에서 만든 ./artifacts/channel/${CHANNEL_NAME}.tx에다가 미쳐 추가하지 못한 Peer를 추가해줍니다.
 
 <img src="https://user-images.githubusercontent.com/96426723/146779789-bc9eff3f-dd18-4dd7-a58c-32167375b3ab.png" width="45%">
 
 5.3 updateAnchorPeers
+
 peer0가 각 organization에서 anchor peer을 맞고 있기 때문에 update 해주도록 합니다.
 
 <img src="https://user-images.githubusercontent.com/96426723/146779803-7d04bf6a-6a96-43a9-8fd5-5125727a7b0e.png" width="75%">

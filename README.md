@@ -156,4 +156,80 @@ peer0가 각 organization에서 anchor peer을 맞고 있기 때문에 update �
 
 <img src="https://user-images.githubusercontent.com/96426723/146779803-7d04bf6a-6a96-43a9-8fd5-5125727a7b0e.png" width="75%">
 
- 
+# 6. Chaincode up
+
+deployChaincode.sh에서 체인코드를 설치하고 불러오고 지지고 볶을 수 있습니다.
+
+6.1 presetup
+
+체인코드가 적혀있는 go 파일을 복사해서 붙여넣기를 해주고  잘 작동할지 on go mod vendor로 확인합니다. go mod vendor로 모듈관리가 가능합니다.
+
+<img src="https://user-images.githubusercontent.com/96426723/146780272-6961d40f-f308-4d79-8373-701ea035f73c.png" width="25%">
+
+※ go sumdb오류가 나는 경우
+
+export GOSUMDB=off
+
+go의 위치를 /home/jaewon으로 해서 다시 설치해줍니다.
+
+6.2 packageChaincode
+
+fabcar.tar.gz파일이 생기는걸 확인가능합니다.
+그 후, 도커 컨테이너에 피어들이 작동하도록 설정합니다.
+
+cd artifacts
+
+docker-compose up -d
+
+<img src="https://user-images.githubusercontent.com/96426723/146780429-2a41c0d4-dd46-4add-806b-2bff279352ba.png" width="75%">
+
+
+6.3 installChaincode
+
+모든 peer에 chaincode를 설치합니다. 앞서 생성한 체인코드가 각 피어에 설치됩니다.
+
+<img src="ttps://user-images.githubusercontent.com/96426723/146780498-c373a427-0372-4ae0-b24c-c73eeaa091c6.png" width="75%">
+
+6.4 queryInstalled & approveForMyOrg1
+
+queryInstalled 함수를 통해 잘 설치되었는지 확인할 수 있습니다.
+
+<img src="https://user-images.githubusercontent.com/96426723/146780604-deada050-72f9-4bd4-9987-59f5ceacd5ef.png" width="85%">
+
+6.5 checkCommitReadyness
+
+Organization 1의 MSP가 승인되었음을 알 수 있습니다. Organization 2의 MSP도 이제 설정해주도록합니다.
+
+<img src="https://user-images.githubusercontent.com/96426723/146780703-9bdee530-b927-4f37-b82c-ba5c0e9017f6.png" width="75%">
+
+<img src="https://user-images.githubusercontent.com/96426723/146780759-c37bcd85-de12-4ec9-a1f8-0b196ace3cc0.png" width="35%">
+
+6.6 commitChaincodeDefination
+
+localhost 7051, localhost 9051에 대해서 chaincode가 설치외어있음을 확인할 수 있습니다.
+
+<img src="https://user-images.githubusercontent.com/96426723/146780831-43748a89-32d0-4270-9804-98bb4eb53d03.png" width="100%">
+
+6.7 chaincodeInvokeInit
+
+체인코드를 invoke하는 코드입니다.
+
+docker ps를 보면 각 peer에 해당하는 status 뒤에 체인코드가 등록되었음을 확인할 수 있습니다.
+
+<img src="https://user-images.githubusercontent.com/96426723/146780931-814d6056-feeb-4081-9482-ec7b14ab242c.png" width="55%">
+
+fabcar.go에 적혀있는 initLedger code chaincode가 시작되고 initLedger을 발동시켜서 데이터베이스에 저장시키는걸 확인할 수 있습니다.
+
+그 후, 크롬을 키고 'localhost:5984/_utils'에 접속해서 data를 확인해봅시다.
+
+peer0.org1.example.com에 연결되어 있는 couchDB 0가 localhost:5984입니다.
+
+peer0Org1에 chaincode를 invoke했기 때문에 couchDB 0에서 해당 자료를 확인할 수 있습니다.
+
+![image](https://user-images.githubusercontent.com/96426723/146781149-441531d1-3169-4096-92ec-76a0bdbe3e29.png)
+
+당연히, 모든 peer에서 distributed ledger에 담긴 정보를 확인할 수 있어야 되기 때문에 5984가 아닌 6984, 7984, 8984에서도 정보를 알 수 있습니다.
+
+
+
+

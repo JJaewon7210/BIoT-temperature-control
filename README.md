@@ -59,9 +59,11 @@ Latest Docker and Visual Studio Code was used to manage this works.
 - MSPDir: crypto-config 파일에서 생성된 orderer 의 MSP 폴더 위치를 적어줍니다.
 - Policies: policies에는 종류가 2가지 있습니다. (공식홈페이지를 참고합시다.)
 
-- create-artifacts.sh 파일에는 OrdererGenesis와 BasicChannel을 만들 수 있는 cli 명령어가 있습니다.
-- 두 명령어를 각각 치면 폴더에 genesis.block 파일과 mychannel. Tx 트랜잭션 파일 그리고 OrgMSPanchors.tx 파일이 생기는걸 확인할 수 있습니다.
-- permission denied error가 뜬다면, "chmod -R 0755 /home/bin/configtxgen" 명령어를 입력합시다.
+create-artifacts.sh 파일에는 OrdererGenesis와 BasicChannel을 만들 수 있는 cli 명령어가 있습니다.
+
+두 명령어를 각각 치면 폴더에 genesis.block 파일과 mychannel. Tx 트랜잭션 파일 그리고 OrgMSPanchors.tx 파일이 생기는걸 확인할 수 있습니다.
+
+permission denied error가 뜬다면, "chmod -R 0755 /home/bin/configtxgen" 명령어를 입력합시다.
 ![image](https://user-images.githubusercontent.com/96426723/146776081-fc191725-e14e-4414-936f-6eb8677bddb7.png)
 
 
